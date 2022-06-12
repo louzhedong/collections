@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blurry Loading</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bg {
+            background: url('https://images.unsplash.com/photo-1576161787924-01bb08dad4a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2104&q=80') no-repeat;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .loading {
+            font-size: 32px;
+            color: #fff;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg"></div>
+    <div class="loading"></div>
+</body>
+
+<script>
+    let load = 0;
+    const bg = document.querySelector('.bg');
+    const loading = document.querySelector('.loading');
+
+    // https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
+    const scale = (num, in_min, in_max, out_min, out_max) => {
+        return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+    }
+
+    const internal = setInterval(() => {
+        load++;
+        if (load > 99) {
+            clearInterval(internal);
+        }
+        loading.innerText = `${load}%`;
+        loading.style.opacity = scale(load, 0, 100, 1, 0);
+        bg.style['filter'] = `blur(${scale(load, 0, 100, 30, 0)}px)`;
+    }, 30)
+</script>
+
+</html>
