@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Collapse</title>
+	<style>
+		* {
+			margin: 0;
+		}
+		body {
+			background-color: #dadada;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding-top: 60px;
+		}
+
+		.collapse {
+			width: 500px;
+			border: 1px #000 solid;
+			margin-bottom: 30px;
+			padding-left: 20px;
+			border-radius: 5px;
+			overflow: hidden;
+			cursor: pointer;
+			transition: all 0.3s;
+		}
+
+		.fold {
+			height: 80px;
+		}
+
+		.unfold {
+			height: 140px;
+			background: #fff;
+		}
+
+		.title {
+			height: 80px;
+			line-height: 80px;
+			font-size: 20px;
+			font-weight: 500;
+		}
+
+		.subtitle {
+			height: 60px;
+			line-height: 60px;
+			font-size: 16px;
+			font-weight: 400;
+		}
+	</style>
+</head>
+<body>
+	<div class="collapse fold">
+		<div class="title">Why shouldn't we trust atoms?</div>
+		<div class="sub-title">They make up everything</div>
+	</div>
+	<div class="collapse fold">
+		<div class="title">Why shouldn't we trust atoms?</div>
+		<div class="sub-title">They make up everything</div>
+	</div>
+	<div class="collapse fold">
+		<div class="title">Why shouldn't we trust atoms?</div>
+		<div class="sub-title">They make up everything</div>
+	</div>
+	<div class="collapse fold">
+		<div class="title">Why shouldn't we trust atoms?</div>
+		<div class="sub-title">They make up everything</div>
+	</div>
+</body>
+
+<script>
+	const collapses = document.querySelectorAll('.collapse');
+	collapses.forEach(collapse => {
+		collapse.addEventListener('click', () => {
+			if (collapse.classList.contains('fold')) {
+				collapse.classList.remove('fold');
+				collapse.classList.add('unfold');
+			} else {
+				collapse.classList.remove('unfold');
+				collapse.classList.add('fold');
+			}
+		})
+	})
+</script>
+</html>
