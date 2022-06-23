@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increment Counter</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            background-color: #8e44ad;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .count {
+            font-size: 40px;
+            font-weight: bold;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="count" data-target="12000"></div>
+</body>
+
+<script>
+    let number = 0;
+
+    const count = document.querySelector('.count');
+    const target = Number(count.dataset.target);
+    const increment = target / 200;
+    const timer = setInterval(() => {
+        if (number >= 12000) {
+            clearInterval(timer);
+            return;
+        }
+        count.innerHTML = number += increment;
+    })
+    
+</script>
+</html>
