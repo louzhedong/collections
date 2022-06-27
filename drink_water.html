@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drink Water</title>
+    <style>
+        :root {
+            --border-color: #144fc6;
+            --fill-color: #6ab3f6;
+            --background-color: #3494e4;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--background-color);
+        }
+
+        .title {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .container {
+            width: 150px;
+            height: 300px;
+            margin-top: 30px;
+            background-color: #fff;
+            border: var(--border-color) 4px solid;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .water {
+            position: absolute;
+            bottom: 0;
+            background-color: var(--fill-color);
+            width: 100%;
+            height: 0;
+            transition: height 0.3s ease-in;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            color: #fff;
+        }
+
+        .tips {
+            margin-top: 15px;
+            color: #fff;
+        }
+
+        .choose-box {
+            display: flex;
+            width: 230px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .choose-item {
+            width: 50px;
+            height: 100px;
+            border: var(--border-color) 4px solid;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .choose-item h4 {
+            color: var(--fill-color);
+            font-weight: 400;
+        }
+
+        .choose-item.choosen {
+            background-color: var(--fill-color);
+        }
+
+        .choose-item.choosen h4 {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="title">Drink Water</h2>
+    <div class="container">
+        <div class="water"></div>
+    </div>
+    <h4 class="tips">Select how many glasses of water that you have drank</h4>
+    <div class="choose-box">
+
+    </div>
+</body>
+
+<script>
+    const chooseBox = document.querySelector('.choose-box');
+    const water = document.querySelector('.water');
+    let chooseHTML = '';
+    let target = 0;
+    for (let i = 0; i < 8; i++) {
+        const innerHTML = `<div class="choose-item" data-index="${i}"><h4>250</h4><h4>ml</h4></div>`;
+        chooseHTML += innerHTML;
+    }
+    chooseBox.innerHTML = chooseHTML;
+
+    const chooseItems = document.querySelectorAll('.choose-item');
+
+    chooseBox.addEventListener('click', (e) => {
+        let currentTarget = e.target;
+        while(!currentTarget.classList.contains('choose-box')) {
+            if (currentTarget.classList.contains('choose-item')) {
+                break;
+            } else {
+                currentTarget = currentTarget.parentNode;
+            }
+        }
+        if (currentTarget.classList.contains('choose-item')) {
+            const index = currentTarget.dataset.index;
+            target = index;
+            water.style.height = 300 / 8 * (Number(index) + 1) + 'px';
+            water.innerHTML = (Number(index) + 1) / 8 * 100 + '%';
+            chooseItems.forEach((choose, i) => {
+                if (i <= index) {
+                    choose.classList.add('choosen');
+                } else {
+                    choose.classList.remove('choosen');
+                }
+            })
+        }
+
+    }, false)
+</script>
+
+</html>
