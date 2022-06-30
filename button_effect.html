@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Effect</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .button {
+            background: purple;
+            color: #fff;
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .button .circle {
+            position: absolute;
+            background-color: #fff;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: scale 0.5s ease-in;
+        }
+
+        @keyframes scale {
+            to {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="button">CLICK ME</button>
+</body>
+
+<script>
+    const button = document.querySelector('.button');
+    button.addEventListener('click', function(e) {
+        const x = e.clientX;
+        const y = e.clientY;
+
+        const buttonTop = e.target.offsetTop;
+        const buttonLeft = e.target.offsetLeft;
+
+        const xInside = x - buttonLeft;
+        const yInside = y - buttonTop;
+
+        const circle = document.createElement('span');
+        circle.classList.add('circle');
+        circle.style.top = yInside + 'px';
+        circle.style.left = xInside + 'px';
+
+        this.appendChild(circle);
+
+        setTimeout(() => circle.remove(), 500);
+
+    })
+</script>
+</html>
